@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div>
+						Type-safe state management made easy
+						<p>(with React and TypeScript)</p>
+						<p style="font-size:25px;">Featuring Our Special Guest: GraphQL</p>
+						<div style="font-size: 25px; margin-top: 75px; font-style: italic;">
+							<p>Lily Barrett</p>
+							<p>Software Engineer @EF/Go Ahead Tours</p>
+							<p>Girl Develop It Boston Leadership Team</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<h2>Why not just use <a href="https://redux.js.org/">Redux?</a></h3>
+					</div>
+				</section>
+				<section>
+					<div style="float: left; width: 75%;">
+						<ul>
+							<li>Redux could be overly complex for your application</li>
+							<li>You may not want or need to use the entire Redux ecosystem</li>
+							<li>It’s got tons of boilerplate code</li>
+							<li>It can be a pain to set up Redux with TypeScript</li>
+						</ul>
+					</div>
+					<div style="float: right; width: 25%; height: 300px;">
+						<img src= "https://cdn-images-1.medium.com/max/600/0*U2DmhXYumRyXH6X1.png"/>
+					</div>
+				</section>
+				<section>
+					<h3>
+						React’s <a href="https://reactjs.org/docs/context.html">Context API</a>
+					</h3>
+				</section>
+				<section>
+					<div style="float: left; width: 45%; font-size: 30px; margin-right: 15px;">
+						<ul>
+							<li>
+								“An upgraded version of old concept of context in React which allow[s] components to share data outside the parent-child relationship.”
+								<span style="font-size: 20px;">~ Rakshit Soral, “Everything You Need to Know About React’s Context API”</span>
+							</li>
+							<li>
+								Tl;dr: A way to share state & avoid prop drilling (as of React 16.3)
+							</li>
+						</ul>
+					</div>
+					<div style="float: right; width: 50%; height: 300px;">
+						<img src= "https://www.carlrippon.com/wp-content/uploads/2018/04/prop-drilling-v-context.png"/>
+						<span style="font-size: 10px;">
+							https://www.carlrippon.com/playing-with-the-context-api-in-react-16-3/
+						</span>
+					</div>
+				</section>
+				<section>
+					<div style="float: left; width: 45%; font-size: 25px;">
+						<ul>
+							<li style="margin-top: 30px;">
+								React.createContext(): Creates the Context and passes it an initial value. Returns an object with a Provider and a Consumer.
+							</li>
+							<li style="margin-top: 30px;">
+								Provider: Accepts a "value" prop
+							</li>
+							<li style="margin-top: 30px;">
+								Consumer: Accepts a "children" prop, which should be a function that accepts the value from the Provider and returns JSX
+							</li>
+						</ul>
+					</div>
+					<div style="float: right; width: 50%; height: 500px;">
+						<img src="./images/context-api-diagram.png" />
+					</div>
+				</section>
+				<section>
+					<p>The best way to explain the Context API in action is to show you. Stay tuned for our demo...</p>
+				</section>
+				<section>
+					<h3>
+						But first, <a href="https://graphql.org/">GraphQL</a>
+					</h3>
+				</section>
+				<section>
+					<div>
+						<ul>
+							<li>
+								A query language that allows you to request only the data you want, when you want it
+							</li>
+							<li>
+								Unlike REST, uses ONE single endpoint to allow you to fetch data via multiple queries at once
+							</li>
+							<li>
+								Built-in type system that helps provide dynamic API self-documentation
+							</li>
+							<li>
+								We can generate static types for our queries with the <a href="https://github.com/apollographql/apollo-cli">apollo-cli</a>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<img src="./images/graphql.png" />
+						<span style="font-size: 10px;">
+							https://graphql.org/
+						</span>
+					</div>
+				</section>
+				<section>
+					<h5>Adding GraphQL to your app</h5>
+					<div data-markdown>
+						```
+						$ npm install --save apollo-boost react-apollo graphql
+						```
+					</div>
+					<div>
+						<p style="font-size: 25px; font-weight: bold;">
+							apollo-boost bundles up several handy packages for working w/ Apollo Client, including:
+						</p>
+						<ul style="font-size: 25px;">
+							<li>
+								<span style="font-weight: bold;">apollo-client:</span> A caching GraphQL client made for use with React, Angular, etc.
+							</li>
+							<li>
+								<span style="font-weight: bold;">apollo-cache-inmemory: </span> The standard, in-memory cache recommended by Apollo Client
+							</li>
+							<li>
+								<span style="font-weight: bold;">apollo-link-http: </span>Fetches GraphQL results from a GraphQL endpoint over an http connection
+							</li>
+							<li>
+								<span style="font-weight: bold;">graphql-tag: </span>Exports the gql function, allowing us to write easily parseable strings for our queries and mutations
+							</li>
+							<li>
+								<span style="font-weight: bold;">react-apollo: </span>Contains bindings to use Apollo Client with React
+							</li>
+							<li>
+								<span style="font-weight: bold;">graphql: </span>References Facebook's original implementation of GraphQL
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h5>Configuring the client</h5>
+					<p>From the <a href="https://github.com/apollographql/react-apollo">React Apollo docs</a></p>
+					<div data-markdown>
+						```
+						import { ApolloClient } from 'apollo-client';
+						import { HttpLink } from 'apollo-link-http';
+						import { InMemoryCache } from 'apollo-cache-inmemory';
+
+						const client = new ApolloClient({
+							// By default, this client will send queries to the
+							//  `/graphql` endpoint on the same host
+							// Pass the configuration option { uri: YOUR_GRAPHQL_API_URL } to the `HttpLink` to connect
+							// to a different host
+							link: new HttpLink(),
+							cache: new InMemoryCache(),
+						});
+						```
+					</div>
+				</section>
+				<section>
+					<h5>Wrapping your root component in an Apollo Provider</h5>
+					<p>This provides you to implicitly connect each component in your tree to GraphQL via Apollo</p>
+					<p>Also from the <a href="https://github.com/apollographql/react-apollo">React Apollo docs</a></p>
+					<pre><code data-trim data-noescape>
+					import { ApolloProvider } from 'react-apollo';
+
+					ReactDOM.render(
+						&lt;ApolloProvider client={client}&gt;
+							&lt;MyRootComponent&gt;
+						&lt;ApolloProvider&gt;,
+						document.getElementById('root'),
+					);
+					</code></pre>
+				</section>
+				<section>
+					<h5>Generating types with Apollo</h5>
+					<div data-markdown>
+						```
+						$ npm i --save apollo-codegen
+						```
+					</div>
+					<div>
+						In your package.json, I recommend adding the following scripts:
+						<div data-markdown>
+							```
+							"introspect": "apollo-codegen introspect-schema GRAPHQL_ENDPOINT --output PATH_TO_SCHEMA_FILE",
+							// this fetches the schema and saves it in our project
+							"generate": "apollo-codegen generate GLOB_PATH_TO_QUERY_FILES --schema PATH_TO_SCHEMA_FILE --target typescript --output PATH_TO_GENERATED_TYPES_FILE --add-typename --tag-name gql",
+							// this generates type interfaces from our schema
+							"typegen": "npm run introspect && npm run generate",
+							```
+						</div>
+						And, once your queries are in place, run:
+						<div data-markdown>
+							```
+							$ npm run typegen
+							```
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>Demo time!</h3>
+				</section>
+				<section>
+					<p>In a burst of hubris the other day, I decided to build the next Amazon.</p>
+				</section>
+				<section>
+					<p>Thankfully, I decided to start small.</p>
+				</section>
+				<section>
+					<h3>Welcome to my Jawn!</h3>
+					<p style="font-size: 20px;">Jawn: <span style="font-style: italic;">noun</span>, chiefly in eastern Pennsylvania, used to refer to a thing, place, person, or event that one need not or cannot give a specific name to.</p>
+				</section>
+				<section>
+					<img src="./images/jawn-shot.png" />
+				</section>
+				<section>
+					<h3>Lily's Jawn:</h3>
+					<ul>
+						<li>Uses TypeScript with Parcel.js, which supports TS right out of the box</li>
+						<li>Calls a <a href="https://medium.com/@notrab/fakerql-is-ultimate-graphql-endpoint-for-fake-data-bd83f4cd6ad1">FakerQL</a> endpoint to emulate GraphQL queries, mutations, etc.</li>
+						<li>Uses the Context API!</li>
+					</ul>
+					<p>Let's break it all down.</p>
+				</section>
+				<section>
+					<h3>
+						Let's set up our GraphQL client!
+					</h3>
+				</section>
+				<section>
+					<h3>
+						Let's set up our context!
+					</h3>
+				</section>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
