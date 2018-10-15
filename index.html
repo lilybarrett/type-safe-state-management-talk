@@ -7,7 +7,7 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/moon.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -25,9 +25,8 @@
 			<div class="slides">
 				<section>
 					<div>
-						Type-safe state management made easy
-						<p>(with React and TypeScript)</p>
-						<p style="font-size:25px;">Featuring Our Special Guest: GraphQL</p>
+						Type-safe state management
+						<p>(with React Context, TypeScript, and GraphQL)</p>
 						<div style="font-size: 25px; margin-top: 75px; font-style: italic;">
 							<p>Lily Barrett</p>
 							<p>Software Engineer @EF/Go Ahead Tours</p>
@@ -78,25 +77,39 @@
 					</div>
 				</section>
 				<section>
-					<div style="float: left; width: 45%; font-size: 25px;">
-						<ul>
-							<li style="margin-top: 30px;">
-								React.createContext(): Creates the Context and passes it an initial value. Returns an object with a Provider and a Consumer.
-							</li>
-							<li style="margin-top: 30px;">
-								Provider: Accepts a "value" prop
-							</li>
-							<li style="margin-top: 30px;">
-								Consumer: Accepts a "children" prop, which should be a function that accepts the value from the Provider and returns JSX
-							</li>
-						</ul>
-					</div>
-					<div style="float: right; width: 50%; height: 500px;">
+					<div style="width: 100%; height: 500px;">
 						<img src="./images/context-api-diagram.png" />
 					</div>
 				</section>
 				<section>
-					<p>The best way to explain the Context API in action is to show you. Stay tuned for our demo...</p>
+					<div style="text-align: left; width: 45%; font-size: 25px;">
+						<ul>
+							<li style="margin-top: 30px;">
+								<span style="font-weight: bold;">React.createContext():</span> Creates the Context and passes it an initial value. Returns an object with a Provider and a Consumer.
+								<pre><code style="font-size: 25px;" data-trim data-noescape>
+									const {Provider, Consumer} = React.createContext(defaultValue);
+								</code></pre>
+							</li>
+							<li style="margin-top: 30px;">
+								<span style="font-weight: bold;">Provider:</span> Accepts a "value" prop.
+								<pre><code style="font-size: 25px;" data-trim data-noescape>
+									&lt;Provider value={VALUE_GOES_HERE}&gt;&lt;/Provider&gt;
+								</code>
+							</li>
+							<li style="margin-top: 30px;">
+								<span style="font-weight: bold;">Consumer:</span> Accepts as children a function that takes in the value from the Provider and returns JSX.
+								<pre><code style="font-size: 25px;" data-trim data-noescape>
+									&lt;Consumer&gt;
+										{value => /* render based on context value */}
+									&lt;/Consumer&gt;
+								</code></pre>
+							</li>
+						</ul>
+						<p style="font-size: 10px;">All examples above are from Context API docs.</p>
+					</div>
+				</section>
+				<section>
+					<p>Stay tuned for our demo...</p>
 				</section>
 				<section>
 					<h3>
@@ -104,7 +117,7 @@
 					</h3>
 				</section>
 				<section>
-					<div>
+					<div style="text-align: left;">
 						<ul>
 							<li>
 								A query language that allows you to request only the data you want, when you want it
@@ -112,6 +125,18 @@
 							<li>
 								Unlike REST, uses ONE single endpoint to allow you to fetch data via multiple queries at once
 							</li>
+						</ul>
+					</div>
+					<div>
+						<img src="./images/graphql.png" />
+						<span style="font-size: 10px;">
+							https://graphql.org/
+						</span>
+					</div>
+				</section>
+				<section>
+					<div style="text-align: left;">
+						<ul>
 							<li>
 								Built-in type system that helps provide dynamic API self-documentation
 							</li>
@@ -127,7 +152,7 @@
 						</span>
 					</div>
 				</section>
-				<section>
+				<section style="text-align: left;">
 					<h5>Adding GraphQL to your app</h5>
 					<div data-markdown>
 						```
@@ -136,7 +161,7 @@
 					</div>
 					<div>
 						<p style="font-size: 25px; font-weight: bold;">
-							apollo-boost bundles up several handy packages for working w/ Apollo Client, including:
+							<span style="font-weight: bold;">apollo-boost</span> bundles up several handy packages for working w/ Apollo Client, including:
 						</p>
 						<ul style="font-size: 25px;">
 							<li>
@@ -160,10 +185,10 @@
 						</ul>
 					</div>
 				</section>
-				<section>
+				<section style="text-align: left;">
 					<h5>Configuring the client</h5>
-					<p>From the <a href="https://github.com/apollographql/react-apollo">React Apollo docs</a></p>
-					<div data-markdown>
+					<p>From the <a href="https://github.com/apollographql/react-apollo">React Apollo docs:</a></p>
+					<div style="font-size: 25px;" data-markdown>
 						```
 						import { ApolloClient } from 'apollo-client';
 						import { HttpLink } from 'apollo-link-http';
@@ -180,11 +205,11 @@
 						```
 					</div>
 				</section>
-				<section>
+				<section style="text-align: left;">
 					<h5>Wrapping your root component in an Apollo Provider</h5>
 					<p>This provides you to implicitly connect each component in your tree to GraphQL via Apollo</p>
-					<p>Also from the <a href="https://github.com/apollographql/react-apollo">React Apollo docs</a></p>
-					<pre><code data-trim data-noescape>
+					<p>Also from the <a href="https://github.com/apollographql/react-apollo">React Apollo docs:</a></p>
+					<pre><code style="font-size: 25px;" data-trim data-noescape>
 					import { ApolloProvider } from 'react-apollo';
 
 					ReactDOM.render(
@@ -195,7 +220,7 @@
 					);
 					</code></pre>
 				</section>
-				<section>
+				<section style="text-align: left;">
 					<h5>Generating types with Apollo</h5>
 					<div data-markdown>
 						```
@@ -204,7 +229,7 @@
 					</div>
 					<div>
 						In your package.json, I recommend adding the following scripts:
-						<div data-markdown>
+						<div style="font-size: 25px;" data-markdown>
 							```
 							"introspect": "apollo-codegen introspect-schema GRAPHQL_ENDPOINT --output PATH_TO_SCHEMA_FILE",
 							// this fetches the schema and saves it in our project
@@ -232,17 +257,17 @@
 				</section>
 				<section>
 					<h3>Welcome to my Jawn!</h3>
-					<p style="font-size: 20px;">Jawn: <span style="font-style: italic;">noun</span>, chiefly in eastern Pennsylvania, used to refer to a thing, place, person, or event that one need not or cannot give a specific name to.</p>
+					<p style="font-size: 20px;"><span style="font-weight: bold;">Jawn: </span><span style="font-style: italic;">noun</span>, chiefly in eastern Pennsylvania, used to refer to a thing, place, person, or event that one need not or cannot give a specific name to.</p>
 				</section>
 				<section>
 					<img src="./images/jawn-shot.png" />
 				</section>
-				<section>
+				<section style="text-align: left;">
 					<h3>Lily's Jawn:</h3>
 					<ul>
-						<li>Uses TypeScript with Parcel.js, which supports TS right out of the box</li>
+						<li>Uses <a href="https://www.typescriptlang.org/">TypeScript</a> with <a href="https://parceljs.org/">Parcel.js</a>, which supports TS right out of the box</li>
 						<li>Calls a <a href="https://github.com/notrab/fakerql">FakerQL</a> endpoint to emulate GraphQL queries, mutations, etc.</li>
-						<li>Uses the Context API!</li>
+						<li>Uses the <a href="https://reactjs.org/docs/context.html">Context API!</a></li>
 					</ul>
 					<p>Let's break it all down.</p>
 				</section>
@@ -262,16 +287,16 @@
 							Todo
 						</li>
 					</ul>
-					<p>For our purposes, we'll be querying Products for our store.</p>
+					<p>For our purposes, we'll be querying products for our store.</p>
 				</section>
 				<section>
 					<h3>
 						Let's set up our GraphQL client!
 					</h3>
 				</section>
-				<section>
-					<p>My app already has all the necessary Apollo Client dependencies installed, and these scripts in my package.json:</p>
-					<div data-markdown>
+				<section style="text-align: left;">
+					<p>My app already has all the necessary Apollo Client dependencies installed, and these scripts included in my package.json:</p>
+					<div style="font-size: 25px;" data-markdown>
 						```
 						"scripts": {
 							"test": "npm run test",
@@ -284,13 +309,14 @@
 						```
 					</div>
 				</section>
-				<section>
-					<p>With these scripts, we'll be generating a schema and types from my data folder, which is structured like this:</p>
-					<div data-markdown>
+				<section style="text-align: left;">
+					<p>With these scripts, we'll be generating a <span style="font-weight: bold;">schema</span> and <span style="font-weight: bold;">types</span> from my <span style="font-weight: bold;">data</span> folder, which is structured like this:</p>
+					<div style="font-size: 25px;" data-markdown>
 						```
 						- data
 							- formatters
-								// for formatting/calculating item prices in USD vs. Euros (More on this later!)
+								// for formatting/calculating item prices in USD vs. Euros
+								// FYI: I've already implemented the money formatter function in this folder
 							- models
 								// when I run my "introspect" script, Apollo will reference the FakerQL endpoint and output the schema onto an index.json file
 								// all files in this folder are auto-generated by the script
@@ -300,9 +326,9 @@
 						```
 					</div>
 				</section>
-				<section>
+				<section style="text-align: left;">
 					<p>We need to create an instance of Apollo Client so we can take advantage of it.</p>
-					<pre><code data-trim data-noescape>
+					<pre><code style="font-size: 15px;" data-trim data-noescape>
 					// ./index.tsx
 					import React from "react";
 					import { ApolloProvider } from "react-apollo";
@@ -329,8 +355,8 @@
 				</section>
 				<section style="text-align: left;">
 					<p>Let's get down to business. I need a query to fetch all the products via FakerQL.</p>
-					<p>I recommend having a file for each query in your data folder.</p>
-					<div data-markdown>
+					<p>I prefer to have a file for each query in my <span style="font-weight: bold;">data</span> folder.</p>
+					<div style="font-size: 25px;" data-markdown>
 						```
 						// data/queries/JAWN_QUERY.ts
 						import gql from "graphql-tag";
@@ -348,9 +374,9 @@
 						```
 					</div>
 				</section>
-				<section>
-					<p>When I run "npm run typegen", here are the types that get generated:</p>
-					<div data-markdown>
+				<section style="text-align: left;">
+					<p>When I run <span style="font-style: italic;">npm run typegen</span>, here are the types that get generated:</p>
+					<div style="font-size: 25px;" data-markdown>
 					```
 					export interface FindJawnProducts_allProducts {
 						__typename: "Product";
@@ -368,36 +394,45 @@
 				</section>
 				<section style="text-align: left;">
 					<div style="font-size: 25px;">
-						<p>Before we hook our components up to GraphQL: What other information do we want besides data about Products, fetched from FakerQL?</p>
-						<p>Hmm. Well, we want to support two different markets: The U.S. and Europe. In order to provide the correct calculations for product prices, we need our components to be aware of our market.</p>
-						<p>It probably makes sense to define our market via our root component:</p>
+						<p>Before we hook our components up to GraphQL: What other information do we want besides data about products fetched from FakerQL?</p>
+						<p>Hmm. Well, we want to support two different markets: The U.S. and Europe.</p>
 					</div>
-					<pre><code data-trim data-noescape>
-					class App extends React.Component {
-						public render () {
-					    	const { market } = this.props;
-						return (
-					        	&lt;ApolloProvider client={client}&gt;
-						    		&lt;&gt;
-							    	  &lt;JawnList /&gt;
-								  	// Will display list of all products from the API
-							      	  &lt;Cart /&gt;
-								  	// Will display all the products we've picked off the list and put in our shopping cart
-								&lt;&gt;
-						  	&lt;/ApolloProvider&gt;
-					     	);
-					   	}
-				    }
+				</section>
+				<section style="text-align: left; font-size: 20px;">
+					<p>In order to provide the correct calculations for product prices, we need our components to be aware of our market.</p>
+					<p>It probably makes sense to define our market via our root component:</p>
+					<pre><code style="font-size: 15px;" data-trim data-noescape>
+							class App extends React.Component {
+								public render () {
+									const { market } = this.props;
+									return (
+										&lt;ApolloProvider client={client}&gt;
+											&lt;&gt;
+												&lt;JawnList /&gt;
+												// Will display list of all products from the API
+												&lt;Cart /&gt;
+												// Will display all the products we've picked off the list and put in our shopping cart
+											&lt;&gt;
+										&lt;/ApolloProvider&gt;
+									);
+								}
+							}
 
-					const HotApp = hot(module)(App);
+							const HotApp = hot(module)(App);
 
-					render(&lt;HotApp market="US"/&gt;, document.getElementById("root"));
-					</code></pre>
+							render(&lt;HotApp market="US"/&gt;, document.getElementById("root"));
+						</code></pre>
 				</section>
 				<section style="text-align: left; font-size: 25px;">
 					<p>But we don't want to drill props down from the root component just to provide awareness about our market.</p>
-					<p>We also have two components -- JawnList and Cart -- that potentially need to know about the products we're fetching from our API, but we don't want to pass that data down as a prop, either.<p>
-					</p>Reason being: Our MVP <span style="font-style: italic;">could</span> grow into a much bigger app, and we don't want to wind up passing details down through components that don't care about them.</p>
+				</section>
+				<section style="text-align: left; font-size: 25px;">
+					<p>We also have two components -- <span style="font-weight: bold;">JawnList</span> and <span style="font-weight: bold;">Cart</span> -- that potentially need to know about the products we're fetching from our API, but we don't want to pass that data down as a prop, either.<p>
+				</section>
+				<section style="text-align: left; font-size: 25px;">
+					<p>Reason being: Our MVP <span style="font-style: italic;">could</span> grow into a much bigger app, and we don't want to wind up passing details down through components that don't care about them.</p>
+				</section>
+				<section>
 					<p>Enter the Context API!</p>
 				</section>
 				<section>
@@ -405,9 +440,9 @@
 						Let's set up our context!
 					</h3>
 				</section>
-				<section>
-					<p>I create a file called JawnContext.tsx, where I define and create my context for the application:</p>
-					<div data-markdown>
+				<section style="text-align: left;">
+					<p>I create a file called <span style="font-weight: bold;">JawnContext.tsx</span>, where I define and create my context for the application:</p>
+					<div style="font-size: 25px;" data-markdown>
 					```
 					import React from "react";
 					import { FindJawnProducts, FindJawnProducts_allProducts } from "./data/models";
@@ -427,164 +462,152 @@
 					```
 					</div>
 				</section>
-				<section>
+				<section style="text-align: left;">
 					<p>Next, let's hook up our context to our root component.</p>
-					<pre><code data-trim data-noescape>
+					<pre><code style="font-size: 15px;" data-trim data-noescape>
 					class App extends React.Component<JawnState> {
 						public render () {
 							const { market } = this.props;
 							return (
-								<ApolloProvider client={client}>
-									<JawnContext.Provider value={{
+								&lt;ApolloProvider client={client}&gt;
+									&lt;JawnContext.Provider value={{
 										cart: this.state.cart,
 										addToCart: this.addToCart,
 										removeFromCart: this.removeFromCart,
 										market,
-									}}>
-										<Container fluid>
-											<Row>
-												<Col xs={12} sm={6}>
-													<JawnList />
-												</Col>
-												<Col xs={12} sm={6}>
-													<Cart />
-												</Col>
-											</Row>
-										</Container>
-									</JawnContext.Provider>
-								</ApolloProvider>
+									}}&gt;
+										&lt;Container fluid&gt;
+											&lt;Row&gt;
+												&lt;Col xs={12} sm={6}&gt;
+													&lt;JawnList /&gt;
+												&lt;/Col&gt;
+												&lt;Col xs={12} sm={6}&gt;
+													&lt;Cart /&gt;
+												&lt;/Col&gt;
+											&lt;/Row&gt;
+										&lt;/Container&gt;
+									&lt;/JawnContext.Provider&gt;
+								&lt;/ApolloProvider&gt;
 							);
 						}
 					}
 					</code></pre>
 				</section>
-				<section>
-					<p>Let's make it easy for our components to quickly and composably consume the context by creating a provider:</p>
+				<section style="text-align: left;">
+					<p>Let's make it easy for our components to quickly and composably consume the context by creating a <span style="font-weight: bold;">provider:</span></p>
 					<pre>
-						<code data-trim data-noescape>
+						<code style="font-size: 20px;" data-trim data-noescape>
 						import React from "react";
 						import JawnContext, { JawnState } from "./JawnContext";
 
-						export default function WithJawnContext<Props extends JawnState> (Child: React.ComponentType<Props>) {
+						export default function WithJawnContext&lt;Props extends JawnState&gt; (Child: React.ComponentType&lt;Props&gt;) {
 								return (props: Props) => (
-									<JawnContext.Consumer>
+									&lt;JawnContext.Consumer&gt;
 										{(contextState) => (
-											<Child {...props} {...contextState} />
+											&lt;Child {...props} {...contextState} /&gt;
 										)}
-									</JawnContext.Consumer>
+									&lt;/JawnContext.Consumer&gt;
 								);
 						}
 						</code>
 					</pre>
 				</section>
-				<section>
-					<p>Let's allow JawnList to "consume" our context!</p>
-					<pre><code data-trim data-noescape>
-					import React from "react";
-					import { JAWN_QUERY } from "../data/queries";
-					import { graphql, ChildDataProps } from "react-apollo";
-					import { FindJawnProducts } from "../data/models";
-					import WithJawnContext from "../WithJawnContext";
-					import { JawnState } from "../JawnContext";
-					import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-					import { faPlus } from "@fortawesome/fontawesome-free-solid";
-					import styled from "react-emotion";
-					import { formatMoney } from "../data/formatters";
-
-					type JawnListType = ChildDataProps<{}, FindJawnProducts> & JawnState;
+				<section style="text-align: left;">
+					<p>Let's allow JawnList to <span style="font-weight: bold;">consume</span> our context!</p>
+					<pre><code style="font-size: 15px;" data-trim data-noescape>
+					// relevant imports here
+					type JawnListType = ChildDataProps&lt;{}, FindJawnProduct&gt; & JawnState;
 
 					const IconWrapper = styled("span")`
 						margin-left: 5px;
 					`;
 
-					const JawnList: React.SFC<JawnListType> = ({ data, market, addToCart }) => {
+					const JawnList: React.SFC&lt;JawnListType&gt; = ({ data, market, addToCart }) => {
 						if (data.loading) {
-							return <div>Loading incredibly important and valuable inventory...</div>;
+							return &lt;div&gt;Loading incredibly important and valuable inventory...&lt;/div&gt;;
 						}
 						return (
-							<>
-								<h1>Welcome to Lily's Jawn</h1>
-								<ul>
+							&lt;>
+								&lt;h1&gt;Welcome to Lily's Jawn&lt;/h1&gt;
+								&lt;ul&gt;
 									{
 										data.allProducts.map((product) => {
 											const { id, price, name } = product;
 											const formattedPrice = formatMoney(market, price);
 											return (
-												<li key={id}>
+												&lt;li key={id}&gt;
 													{name} - {formattedPrice}
-													<IconWrapper onClick={() => addToCart(product)}>
-														<FontAwesomeIcon
+													&lt;IconWrapper onClick={() => addToCart(product)}&gt;
+														&lt;FontAwesomeIcon
 															icon={faPlus}
-														/>
-													</IconWrapper>
-												</li>
+														/&gt;
+													&lt;/IconWrapper&gt;
+												&lt;/li&gt;
 											);
 										})
 									}
-								</ul>
-							</>
+								&lt;/ul&gt;
+							&lt;/&gt;
 						);
 					};
 
-					const WithJawnProductData = graphql<{}, FindJawnProducts>(JAWN_QUERY);
+					const WithJawnProductData = graphql&lt;{}, FindJawnProducts&gt;(JAWN_QUERY);
 
 					export default WithJawnProductData(WithJawnContext(JawnList));
 					</code></pre>
 				</section>
-				<section>
-					<p>Let's also allow Cart to consume the context</p>
-					<pre><code data-trim data-noescape>
-					import React, { Component } from "react";
-					import { JawnState } from "../JawnContext";
-					import WithJawnContext from "../WithJawnContext";
-					import { formatMoney } from "../data/formatters";
-					import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-					import { faMinus } from "@fortawesome/fontawesome-free-solid";
-					import styled from "react-emotion";
+				<section style="text-align: left;">
+					<p>Let's also allow Cart to consume the context.</p>
+					<pre><code style="font-size: 15px;" data-trim data-noescape>
+					// relevant imports here
 
 					const IconWrapper = styled("span")`
 						margin-left: 5px;
 					`;
 
-					const Cart: React.SFC<JawnState> = ({ market, cart, removeFromCart }) => {
+					const Cart: React.SFC&lt;JawnState&gt; = ({ market, cart, removeFromCart }) => {
 						const total = cart.reduce((sum, item) => {
 							sum += parseInt(item.price, 10);
 							return sum;
 						}, 0);
 						return (
-							<>
-									<h1>Your cart</h1>
-									<ul>
+							&lt;&gt;
+									&lt;h1>Your cart&lt;/h1&gt;
+									&lt;ul&gt;
 										{ cart.map((item, index) => (
-											<li key={index}>
+											&lt;li key={index}&gt;
 												{item.name} - {formatMoney(market, item.price)}
-												<IconWrapper onClick={() => removeFromCart(index)}>
-													<FontAwesomeIcon icon={faMinus} />
-												</IconWrapper>
-											</li>
+												&lt;IconWrapper onClick={() => removeFromCart(index)}&gt;
+													&lt;FontAwesomeIcon icon={faMinus} /&gt;
+												&lt;/IconWrapper&gt;
+											&lt;/li&gt;
 										))}
-									</ul>
-									<h3>
+									&lt;/ul&gt;
+									&lt;h3&gt;
 										Total: ${total}
-									</h3>
-								</>
+									&lt;/h3&gt;
+								&lt;/&gt;
 						);
 					};
 
 					export default WithJawnContext(Cart);
 					</code></pre>
 				</section>
-				<section>
+				<section style="text-align: left;">
 					<p>Takeaways</p>
 					<ul>
-						<li>The Context API, in conjunction with TypeScript, provides a type-safe, lightweight way to share state and data without drilling props down</li>
-						<li>Apollo allows us to use TypeScript to generate query and schema types for our GraphQL queries and mutations</li>
-						<li>Voila! Type-safe state management!</li>
+						<li>Apollo-CLI helps us generate GraphQL types</li>
+						<li>The Context API, working together with TypeScript, provides a type-safe, lightweight way to share state and data without drilling props down</li>
 					</ul>
 				</section>
-				<section>
-					Questions?
-					(provide github, blog, linkedin, email)
+				<section style="text-align: left;">
+					<p style="font-weight: bold;">Questions?</p>
+
+					<ul>
+						<li>Blog: <span style="font-weight: bold;">lilydbarrett.com</span></li>
+						<li>Github: <span style="font-weight: bold;">@lilybarrett</span></li>
+						<li>LinkedIn: <span style="font-weight: bold;">linkedin.com/in/lilybarrett</span></li>
+					</ul>
 				</section>
 		</div>
 
